@@ -1,5 +1,6 @@
 ﻿using Navigation_Dictionary.ViewModels;
 using Navigation_Dictionary.Views;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -33,9 +34,11 @@ namespace Navigation_Dictionary.Services
             if ((mainFrame?.Content as FrameworkElement)?.DataContext is not ViewModelBase viewModel)
                 return;
 
-            // 反射获取导航到页面的viewModel，并获取ViewModel中的Property
-            // 如果和extraData中的Key有相同名称的属性，则将value赋值给这个Property
-            // 属性必须有Set方法，否则 ArgumentException：Property Set method not found.
+            /* 
+               反射获取导航到页面的viewModel，并获取ViewModel中的Property
+               如果和extraData中的Key有相同名称的属性，则将value赋值给这个Property
+               属性必须有Set方法，否则 ArgumentException：Property Set method not found.
+            */
             foreach (var item in extraData) 
             { 
                 viewModel.GetType().GetProperty(item.Key)?.SetValue(viewModel, item.Value);
@@ -43,7 +46,7 @@ namespace Navigation_Dictionary.Services
         }
 
         /// <summary>
-        /// 维护字典，用于导航
+        /// 维护字典，用于导航 Mapping ViewModel and View
         /// </summary>
         private readonly Dictionary<Type, Type> mapping = new()
         {
@@ -51,16 +54,33 @@ namespace Navigation_Dictionary.Services
             [typeof(HomeViewModel)] = typeof(HomeView),
         };
 
+        /// <summary>
+        /// 使用了两种方式进行 映射View和viewModel。
+        /// 方式1：通过字典Mapping，通过Key（ViewModel）直接获取Value（View）
+        /// 方式2：通过类似Prism的Locator的方式，获取 viewModel 的 类名，去除 类名 中的 “Model” 后匹配 View
+        /// </summary>
+        /// <typeparam name="T"> 要导航的 View 的 viewModel （类型）</typeparam>
+        /// <param name="extraData"> 传递的参数 </param>
         public void Navigate<T>(Dictionary<string, object?>? extraData = null) 
             where T : ViewModelBase
         {
-            if (!mapping.TryGetValue(typeof(T), out Type? view))
-                return;
+            // 方式2
+            var view = FindView<T>();
+            if (view is null) return;
+
+            // 方式1
+            //if (!mapping.TryGetValue(typeof(T), out Type? view))
+            //    return;
+
             var page = App.Current.Services.GetService(view) as Page;
             mainFrame?.Navigate(page, extraData);
         }
 
-        //public void SetMainFrame(Frame frame) => mainFrame = frame;
-
+        private Type? FindView<T>()
+        {
+            return Assembly.GetAssembly(typeof(T))?
+                .GetTypes()
+                .FirstOrDefault(t => t.Name == typeof(T).Name.Replace("Model", ""));
+        }
     }
 }
