@@ -28,3 +28,4 @@ D:\Desktop\WorkSpace\WPF\Navigation_Dictionary\obj\Debug\net8.0-windows\Navigati
 D:\Desktop\WorkSpace\WPF\Navigation_Dictionary\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 D:\Desktop\WorkSpace\WPF\Navigation_Dictionary\obj\Debug\net8.0-windows\Views\HomeView.g.cs
 D:\Desktop\WorkSpace\WPF\Navigation_Dictionary\obj\Debug\net8.0-windows\Views\HomeView.baml
+D:\Desktop\WorkSpace\WPF\Navigation_Dictionary\obj\Debug\net8.0-windows\Navigation_Dictionary.sourcelink.json

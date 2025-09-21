@@ -21,7 +21,7 @@ namespace Navigation_Dictionary.Views
     /// </summary>
     public partial class HomeView : Page
     {
-        public HomeView(ViewModelBase vm)
+        public HomeView(HomeViewModel vm)
         {
             InitializeComponent();
             this.DataContext = vm;

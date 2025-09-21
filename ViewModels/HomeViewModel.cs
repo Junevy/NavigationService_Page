@@ -11,7 +11,12 @@ namespace Navigation_Dictionary.ViewModels
     {
 
         [ObservableProperty]
-        private string message;
+        private string userName;
+        [ObservableProperty]
+        private string password;
+
+        //[obser]
+        public string Message => $"Halo {UserName} and user password : {Password} ";
 
     }
 }

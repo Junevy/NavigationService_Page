@@ -28,7 +28,9 @@ namespace Navigation_Dictionary
             container.AddSingleton<MainView>();
             container.AddSingleton<MainViewModel>();
             container.AddSingleton<LoginView>();
-            container.AddSingleton<LoginViewModel>();
+            container.AddSingleton<LoginViewModel>(); 
+            container.AddSingleton<HomeView>();
+            container.AddSingleton<HomeViewModel>();
             container.AddSingleton<Services.NavigationService>();
 
             Services = container.BuildServiceProvider();

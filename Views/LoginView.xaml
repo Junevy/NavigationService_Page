@@ -3,21 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Navigation_Dictionary.ViewModels"
       xmlns:local="clr-namespace:Navigation_Dictionary.Views"
       mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance Type=vm:LoginViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginView">
     <StackPanel HorizontalAlignment="Center">
         <Border BorderThickness="1" CornerRadius="5" BorderBrush="LightGray">
             <StackPanel Margin="5">
                 <TextBlock Text="UserName"/>
-                <TextBox Width="100" Height="20" />
+                <TextBox Width="100" Height="20" Text="{Binding UserName}"/>
                 <TextBlock Text="Password"/>
-                <TextBox Width="100" Height="20"/>
-                <Button Content="Login" Width="100" Height="20"/>
+                <TextBox Width="100" Height="20" Text="{Binding Password}"/>
+                <Button Content="Login" Width="100" Height="20" Command="{Binding LoginCommand}"/>
 
-                <!--测试上下文是否关联成功-->
-                <TextBlock Text="{Binding Message}"/>
+                <!--测试上下文是否关联成功--><!--
+                <TextBlock Text="{Binding Message}"/>-->
             </StackPanel>
         </Border>
     </StackPanel>
