@@ -1,0 +1,22 @@
+﻿<Window x:Class="Navigation_Dictionary.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Navigation_Dictionary.Views" 
+        xmlns:b ="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        xmlns:vm ="clr-namespace:Navigation_Dictionary.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        Title="MainView" Height="450" Width="800">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger>
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <!--<Frame NavigationUIVisibility="Hidden" x:Name="MainFrame" >
+        
+    </Frame>-->
+</Window>
